@@ -1,4 +1,5 @@
 import type { ViewId } from "../app";
+import { Sports } from "../plugins/sports";
 
 interface SidebarProps {
   view: ViewId;
@@ -15,8 +16,12 @@ export function SideBar({ view, onClose }: SidebarProps) {
       <box padding={1} flexGrow={1}>
         {view === "files" ? (
           <text fg="#6c7086">files go here</text>
+
         ) : (
-          <text fg="#6c7086">plugins go here</text>
+          <>
+            <text fg="#6c7086">plugins go here</text>
+            <Sports />
+          </>
         )}
       </box>
     </box>
