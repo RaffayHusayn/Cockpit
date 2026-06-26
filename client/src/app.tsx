@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTerminalDimensions, useKeyboard } from "@opentui/react";
 import { ActivityBar } from "./components/activityBar";
-import { Sidebar } from "./components/sidebar";
+import { SideBar } from "./components/sideBar";
 
 export type ViewId = "files" | "plugins";
 
@@ -18,7 +18,7 @@ export function App() {
   return (
     <box width={dims.width} height={dims.height} flexDirection="row" backgroundColor="#121212">
       <ActivityBar activeView={activeView} onSelect={setActiveView} />
-      {activeView && <Sidebar view={activeView} onClose={() => setActiveView(null)} />}
+      {activeView && <SideBar view={activeView} onClose={() => setActiveView(null)} />}
       <box flexGrow={1} flexDirection="column" backgroundColor="#1e1e2e">
         <box height={1}>
           <text fg="#888888">Ctrl+E to toggle sidebar</text>

@@ -7,7 +7,7 @@ interface ActivityBarProps {
 }
 
 const icons: { id: ViewId; icon: string; label: string }[] = [
-  { id: "files", icon: "\u2500\u2500", label: "Files" },
+  { id: "files", icon: "◈", label: "Files" },
   { id: "plugins", icon: "\u25a0\u25a0", label: "Plugins" },
 ];
 

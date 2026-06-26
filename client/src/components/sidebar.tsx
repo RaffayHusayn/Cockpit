@@ -1,4 +1,3 @@
-import React from "react";
 import type { ViewId } from "../app";
 
 interface SidebarProps {
@@ -6,7 +5,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-export function Sidebar({ view, onClose }: SidebarProps) {
+export function SideBar({ view, onClose }: SidebarProps) {
   return (
     <box width={26} flexDirection="column" backgroundColor="#181825">
       <box height={1} backgroundColor="#1e1e2e" onMouseDown={onClose}>
