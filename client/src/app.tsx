@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTerminalDimensions, useKeyboard } from "@opentui/react";
+import { useTerminalDimensions, useKeyboard, createRoot } from "@opentui/react";
 import { ActivityBar } from "./components/activity-bar";
 import { SideBar } from "./components/side-bar";
 import { MainCanvas } from "./components/main-canvas";
@@ -7,11 +7,13 @@ import { PluginPreview } from "./components/plugin-preview";
 import { WorkspaceView } from "./components/workspace-view";
 import { plugins } from "./plugins/registry";
 import { WorkspaceProvider, useWorkspaces } from "./workspace/context";
+import { createCliRenderer } from "@opentui/core";
 
 export type ViewId = "workspaces" | "plugins";
 
-export const Run = ()=>{
-  return (
+export const run = async () => {
+  const renderer = await createCliRenderer();
+  createRoot(renderer).render(
     <WorkspaceProvider>
       <App />
     </WorkspaceProvider>
