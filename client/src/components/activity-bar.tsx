@@ -7,7 +7,7 @@ interface ActivityBarProps {
 }
 
 const icons: { id: ViewId; shortcut: string; label: string }[] = [
-  { id: "files",   shortcut: "[:w]", label: "Workspaces" },
+  { id: "workspaces",   shortcut: "[:w]", label: "Workspaces" },
   { id: "plugins", shortcut: "[:e]", label: "Extensions" },
 ];
 

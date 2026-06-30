@@ -6,21 +6,30 @@ import { MainCanvas } from "./components/main-canvas";
 import { PluginPreview } from "./components/plugin-preview";
 import { WorkspaceView } from "./components/workspace-view";
 import { plugins } from "./plugins/registry";
-import type { Workspace } from "./workspace/types";
+import { WorkspaceProvider, useWorkspaces } from "./workspace/context";
 
-export type ViewId = "files" | "plugins";
+export type ViewId = "workspaces" | "plugins";
 
-const defaultWorkspace: Workspace = { id: "default", name: "Default", widgets: [] };
+export const Run = ()=>{
+  return (
+    <WorkspaceProvider>
+      <App />
+    </WorkspaceProvider>
+  );
+}
 
-export function App() {
+function App() {
   const termDims = useTerminalDimensions();
   const [activeView, setActiveView] = useState<ViewId | null>(null);
   const [activePluginId, setActivePluginId] = useState<string | null>(null);
-  const [workspace, _setWorkspace] = useState<Workspace>(defaultWorkspace);
+  const { activeWorkspace } = useWorkspaces();
 
   useKeyboard((e) => {
     if (e.ctrl && e.name === "e") {
       setActiveView((v) => (v === "plugins" ? null : "plugins"));
+    }
+    if (e.ctrl && e.name === "w") {
+      setActiveView((v) => (v === "workspaces" ? null : "workspaces"));
     }
   });
 
@@ -39,11 +48,18 @@ export function App() {
         />
       )}
       <MainCanvas>
-        {showPluginPreview
-          ? <PluginPreview plugin={activePlugin} />
-          : <WorkspaceView workspace={workspace} />
-        }
+        {showPluginPreview ? (
+          <PluginPreview plugin={activePlugin} />
+        ) : activeWorkspace ? (
+          <WorkspaceView workspace={activeWorkspace} />
+        ) : (
+          <box flexGrow={1} alignItems="center" justifyContent="center">
+            <text fg="#313244">No workspace selected — create one from the Workspaces tab</text>
+          </box>
+        )}
       </MainCanvas>
     </box>
   );
 }
+
+
